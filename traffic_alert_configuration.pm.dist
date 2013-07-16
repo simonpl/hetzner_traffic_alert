@@ -1,0 +1,11 @@
+package traffic_alert_configuration;
+$url = "https://robot-ws.your-server.de/traffic";
+$server = "robot-ws.your-server.de";
+$realm = "robot-ws";
+$port = "443";
+$ip = "0.0.0.0"; # The ip of your server.
+$user = "user";
+$password = "password";
+$agent = "Hetzner Traffic Alert"; # User agent
+$allowed = 20000; # How much GB are you allowed to use?
+$warn_threshold = 10; # At what percentage of allowed traffic do you want to be warned?
