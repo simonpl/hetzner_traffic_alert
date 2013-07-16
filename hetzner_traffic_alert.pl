@@ -23,7 +23,6 @@ use LWP;
 use POSIX qw/strftime/;
 use warnings;
 use strict;
-use Data::Dumper;
 use traffic_alert_configuration;
 my $browser = LWP::UserAgent->new;
 $browser->agent($traffic_alert_configuration::agent);
