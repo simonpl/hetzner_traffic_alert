@@ -9,6 +9,5 @@ $password = "password";
 $agent = "Hetzner Traffic Alert"; # User agent
 $allowed = 20000; # How much GB are you allowed to use?
 $warn_threshold = 10; # At what percentage of allowed traffic do you want to be warned?
-$trigger = 0; # Should something be triggered if you reach the warn_threshold?
+$trigger = 0; # Should something be triggered if you reach the warn_threshold? 0 for no, 1 for yes.
 $triggercom = "cat /dev/null"; # What command should be triggered?
-

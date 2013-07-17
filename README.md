@@ -6,11 +6,13 @@ Setup
 
 Note: The tool was tested with Perl v5.14.2. Other versions may cause problems or not work at all.
 
-1. Copy the file `traffic_alert_configuration.pm.dist` to `traffic_alert_configuration.pm`.
+1. Get a username and a password you can use with the Hetzner API. See http://wiki.hetzner.de/index.php/Robot_Webservice/en for further information about the Hetzner API.
 
-2. Adjust `traffic_alert_configuration.pm` to the values that fit with your setup and with your requirements. To read how you can get an username/password-combination for the Hetzner API, read http://wiki.hetzner.de/index.php/Robot_Webservice/en
+2. Copy the file `traffic_alert_configuration.pm.dist` to `traffic_alert_configuration.pm`.
 
-3. Mark `hetzner_traffic_alert.pl` as executable (`chmod hetzner_traffic_alert.pl +x`)
+3. Adjust `traffic_alert_configuration.pm` to the values that fit with your setup and with your requirements.
+
+4. Mark `hetzner_traffic_alert.pl` as executable (`chmod hetzner_traffic_alert.pl +x`).
 
 Usage
 -----
