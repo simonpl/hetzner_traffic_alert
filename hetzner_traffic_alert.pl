@@ -49,4 +49,8 @@ print "\n";
 if($left < $traffic_alert_configuration::warn_threshold * $traffic_alert_configuration::allowed * 0.01)
 {
     print "Warning: You have less than ".$traffic_alert_configuration::warn_threshold."% of your monthly allowd traffic amount left!\n";
+    if($traffic_alert_configuration::trigger)
+    {
+        system($traffic_alert_configuration::triggercom);
+    }
 }
