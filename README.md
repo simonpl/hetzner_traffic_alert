@@ -12,7 +12,7 @@ Note: The tool was tested with Perl v5.14.2. Other versions may cause problems o
 
 3. Adjust `traffic_alert_configuration.pm` to the values that fit with your setup and with your requirements.
 
-4. Mark `hetzner_traffic_alert.pl` as executable (`chmod hetzner_traffic_alert.pl +x`).
+4. Mark `hetzner_traffic_alert.pl` as executable (`chmod +x hetzner_traffic_alert.pl`).
 
 Usage
 -----
