@@ -18,8 +18,9 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-use JSON::Any;
+use JSON;
 use LWP;
+use HTTP::Request;
 use POSIX qw/strftime/;
 use warnings;
 use strict;
@@ -32,18 +33,28 @@ $browser->credentials(
     $traffic_alert_configuration::user,
     $traffic_alert_configuration::password
 );
-my $response = $browser->post($traffic_alert_configuration::url,
-    [
-        "type" => "month",
-        "from" => strftime("%Y-%m", localtime)."-01",
-        "to" => strftime("%Y-%m", localtime)."-31",
-        "ip[]" => $traffic_alert_configuration::ip
-    ],
-);
-my $j = JSON::Any->new;
-my $obj = $j->jsonToObj($response->content);
-print "Outgoing traffic this month so far: ".$obj->{"traffic"}->{"data"}->{"176.9.101.132"}{"out"}." GB\n";
-my $left = $traffic_alert_configuration::allowed - $obj->{"traffic"}->{"data"}->{"176.9.101.132"}{"out"};
+my $request = new HTTP::Request('POST',$traffic_alert_configuration::url);
+$request->content_type("application/x-www-form-urlencoded");
+my $content = 'type=month&from='.strftime("%Y-%m", localtime).'-01&to='.strftime("%Y-%m", localtime).'-31';
+foreach(@traffic_alert_configuration::ips)
+{
+    $content .= '&ip[]='.$_;
+}
+foreach(@traffic_alert_configuration::subnets)
+{
+    $content .= '&subnet[]='.$_;
+}
+$request->content($content);
+my $response = $browser->request($request);
+my $obj = JSON->new->utf8->decode($response->content);
+my $sumtraffic = 0;
+my $key;
+while($key = each $obj->{"traffic"}->{"data"})
+{
+    $sumtraffic += $obj->{"traffic"}->{"data"}->{$key}->{"out"};
+}
+print "Outgoing traffic this month so far: ".$sumtraffic." GB\n";
+my $left = $traffic_alert_configuration::allowed - $sumtraffic;
 print "You have ".$left." GB of outgoing traffic remaining this month.";
 print "\n";
 if($left < $traffic_alert_configuration::warn_threshold * $traffic_alert_configuration::allowed * 0.01)
