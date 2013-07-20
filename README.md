@@ -23,7 +23,8 @@ Requirements
 ------------
 
 * Perl 5 (tested with Perl v5.14.2)
-* The Perl-module JSON::Any
+* The Perl-module JSON
+* The Perl-module HTTP::Request
 * The Perl-module POSIX
 * The Perl-module LWP
 
